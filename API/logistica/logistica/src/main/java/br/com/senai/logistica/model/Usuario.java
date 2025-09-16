@@ -27,4 +27,13 @@ public class Usuario {
 
     @Column(name = "senha",  nullable = false)
     private String senha;
+
+    //Mapeando relacionamento entre tabelas (uma classe dentro da outra)
+    //Muitos USUARIOS para um TIPO USUARIO
+    //FetchType.EAGER - carrega os dados juntos
+    //optional - obrigatorio ou nao
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    //@JoinColumn - avisar para o JAVA qual coluna do TIPO USUARIO que vou relacionar
+    @JoinColumn(name = "tipo_usuario_id")
+    private TipoUsuario tipoUsuario;
 }
