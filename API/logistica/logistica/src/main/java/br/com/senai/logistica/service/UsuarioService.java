@@ -21,7 +21,7 @@ public class UsuarioService {
     }
 
     //Metodo Cadastrar
-    public Usuario cadastroUsuario(Usuario usuario) {
+    public Usuario cadastrarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 

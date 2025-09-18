@@ -31,7 +31,7 @@ public class UsuarioController {
     public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody Usuario usuario) {
 
         //1. Tentar cadastrar o tipo de usuario
-        usuarioService.cadastroUsuario(usuario);
+        usuarioService.cadastrarUsuario(usuario);
 
         //Codigo 201 - CREATED
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
@@ -53,7 +53,7 @@ public class UsuarioController {
 
     //Metodo Deletar
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletarUsuarioPorId(@PathVariable Integer id) {
+    public ResponseEntity<?> deletarUsuario(@PathVariable Integer id) {
 
         //1. Verificar se o usuario existe
         Usuario usuario = usuarioService.buscarPorId(id);
@@ -69,5 +69,18 @@ public class UsuarioController {
     }
 
     //Metodo Atualizar
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuarioNovo) {
 
+        //1. Tento atualizar o usuario
+        Usuario usuarioAntigo = usuarioService.atualizarUsuario(id, usuarioNovo);
+
+        //2. Se não achar o usuario, mostro erro
+        if (usuarioAntigo == null) {
+            return ResponseEntity.status(404).body("Usuario não encontrado !");
+        }
+
+        //3. Se achar, retorno ok
+        return ResponseEntity.ok(usuarioAntigo);
+    }
 }

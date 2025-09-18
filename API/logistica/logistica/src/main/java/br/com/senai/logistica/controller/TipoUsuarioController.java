@@ -75,17 +75,17 @@ public class TipoUsuarioController {
 
     //Metodo Atualizar
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizarTipoUsuarioPorId(@PathVariable Integer id, @RequestBody TipoUsuario tipoNovo) {
+    public ResponseEntity<?> atualizarTipoUsuario(@PathVariable Integer id, @RequestBody TipoUsuario tipoNovo) {
 
         //1. Tento atualizar o tipo usuario
-        TipoUsuario tipoUsuario = tipoUsuarioService.atualizarTipoUsuario(id, tipoNovo);
+        TipoUsuario tipoAntigo = tipoUsuarioService.atualizarTipoUsuario(id, tipoNovo);
 
         //2. Se não achar o tipo de usuario, mostro erro
-        if (tipoUsuario == null) {
+        if (tipoAntigo == null) {
             return ResponseEntity.status(404).body("Tipo de Usuario não encontrado !");
         }
 
         //3. Se achar, retorno ok
-        return ResponseEntity.ok(tipoUsuario);
+        return ResponseEntity.ok(tipoAntigo);
     }
 }
