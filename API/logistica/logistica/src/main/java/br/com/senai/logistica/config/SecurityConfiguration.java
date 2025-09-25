@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.SecurityFilterChain;
 
 import javax.crypto.spec.SecretKeySpec;
 
@@ -55,7 +55,7 @@ public AuthenticationManager authenticationManager(AuthenticationConfiguration c
 
 //O FILTRO DE SEGURANÇA
 @Bean
-public SecurityWebFilterChain springSecurityFilterChain(HttpSecurity http) throws Exception {
+public SecurityFilterChain springSecurityFilterChain(HttpSecurity http) throws Exception {
 
     http
 
@@ -63,7 +63,8 @@ public SecurityWebFilterChain springSecurityFilterChain(HttpSecurity http) throw
             .sessionManagement(session ->
                     session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                    .anyRequest().permitAll();
+                    .anyRequest().permitAll());
+
     return http.build();
     }
 }
